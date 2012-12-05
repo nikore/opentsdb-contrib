@@ -34,7 +34,7 @@ public class NettyServer extends AbstractIdleService {
     bootstrap.setOption("child.keepAlive", true);
     bootstrap.setOption("reuseAddress", true);
 
-    logger.info("Server started");
+    logger.info("Server started on {}", address.toString());
     bootstrap.bind(address);
   }
 

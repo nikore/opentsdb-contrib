@@ -2,11 +2,8 @@ package net.opentsdb.proxy.netty;
 
 import net.opentsdb.proxy.kafka.KafkaProducer;
 import org.jboss.netty.channel.Channel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class PutDataPointRpc implements TelnetRpc {
-  private static final Logger logger = LoggerFactory.getLogger(PutDataPointRpc.class);
   private final KafkaProducer producer;
 
   public PutDataPointRpc(KafkaProducer producer) {

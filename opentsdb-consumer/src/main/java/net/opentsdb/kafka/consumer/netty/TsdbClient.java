@@ -24,7 +24,7 @@ public class TsdbClient extends AbstractIdleService {
 
   @Inject
   public TsdbClient(ChannelFactory factory, InetSocketAddress address, TsdbClientPipelineFactory pipelineFactory) {
-    logger.info("Starting up tsdbclient");
+    logger.info("Starting up TSDB client");
 
     this.address = address;
     this.bootstrap = new ClientBootstrap(factory);
@@ -36,19 +36,19 @@ public class TsdbClient extends AbstractIdleService {
     ChannelFuture future = bootstrap.connect(address);
 
     channel = future.awaitUninterruptibly().getChannel();
-    if(!future.isSuccess()) {
+    if (!future.isSuccess()) {
       future.getCause().printStackTrace();
       bootstrap.releaseExternalResources();
       System.exit(1);
     }
 
-    logger.info("Done starting up tsdbclient");
+    logger.info("Done starting up TSDB lient");
   }
 
   @Override
   protected void shutDown() throws Exception {
-    logger.info("Shutting down tsdb client");
-    if(lastWriteFuture != null) {
+    logger.info("Shutting down TSDB client");
+    if (lastWriteFuture != null) {
       lastWriteFuture.awaitUninterruptibly();
     }
 
@@ -57,7 +57,7 @@ public class TsdbClient extends AbstractIdleService {
   }
 
   public void send(String message) {
-    logger.info("sending message {}", message);
+    logger.debug("sending message {}", message);
     lastWriteFuture = channel.write(message + "\r\n");
   }
 }

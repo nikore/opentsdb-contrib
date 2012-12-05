@@ -6,7 +6,6 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import kafka.consumer.Consumer;
 import kafka.consumer.ConsumerConfig;
-
 import kafka.consumer.KafkaStream;
 import kafka.consumer.Whitelist;
 import kafka.javaapi.consumer.ConsumerConnector;
@@ -22,7 +21,7 @@ import java.nio.charset.CharsetDecoder;
 import java.util.Properties;
 
 @Singleton
-public class TsdbConsumer extends AbstractIdleService{
+public class TsdbConsumer extends AbstractIdleService {
   private static final String KAFKA_TOPIC = "tsdb.kafka.topic";
 
   private static final Logger logger = LoggerFactory.getLogger(TsdbConsumer.class);

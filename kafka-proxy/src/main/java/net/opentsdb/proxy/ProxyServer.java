@@ -32,7 +32,7 @@ public class ProxyServer {
 
     final NettyServer server = injector.getInstance(NettyServer.class);
 
-    logger.info("Starting Server on port 8080 ....");
+    logger.info("Starting Server ...");
     server.startAndWait();
     Runtime.getRuntime().addShutdownHook(new Thread() {
       @Override
