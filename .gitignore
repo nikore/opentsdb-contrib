@@ -1,0 +1,10 @@
+.DS_Store
+build/**/*
+test/**/*
+target/**/*
+target/
+*.ipr
+*.iws
+*.iml
+.idea
+*.jar
