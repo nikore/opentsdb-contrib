@@ -49,7 +49,7 @@ public class TsdbConsumer extends AbstractIdleService {
     KafkaStream<Message> stream = consumerConnector.createMessageStreamsByFilter(new Whitelist(topic), 1, new DefaultDecoder()).get(0);
     for (MessageAndMetadata<Message> aStream : stream) {
       String message = decoder.decode(aStream.message().payload()).toString();
-      logger.info("Message is: {}", message);
+      logger.debug("Message is: {}", message);
       client.send(message);
     }
   }

@@ -24,8 +24,6 @@ public class TsdbClient extends AbstractIdleService {
 
   @Inject
   public TsdbClient(ChannelFactory factory, InetSocketAddress address, TsdbClientPipelineFactory pipelineFactory) {
-    logger.info("Starting up TSDB client");
-
     this.address = address;
     this.bootstrap = new ClientBootstrap(factory);
     bootstrap.setPipelineFactory(pipelineFactory);
@@ -42,7 +40,7 @@ public class TsdbClient extends AbstractIdleService {
       System.exit(1);
     }
 
-    logger.info("Done starting up TSDB lient");
+    logger.info("Done starting up TSDB client");
   }
 
   @Override

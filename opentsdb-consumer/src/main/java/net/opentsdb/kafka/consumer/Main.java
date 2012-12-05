@@ -30,11 +30,11 @@ public class Main {
 
     Injector injector = Guice.createInjector(new ConsumerModule(props));
 
-    logger.info("Starting TSDB Client");
+    logger.info("Starting TSDB Client...");
     final TsdbClient server = injector.getInstance(TsdbClient.class);
     server.startAndWait();
 
-    logger.info("Starting TSDB Consumer");
+    logger.info("Starting TSDB Consumer...");
     final TsdbConsumer consumer = injector.getInstance(TsdbConsumer.class);
     consumer.startAndWait();
 
