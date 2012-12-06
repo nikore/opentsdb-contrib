@@ -33,8 +33,8 @@
   </licenses>
 
 
-  <groupId>kafka-opentsdb</groupId>
-  <artifactId>kafka-opentsdb</artifactId>
+  <groupId>net.opentsdb.contrib</groupId>
+  <artifactId>core</artifactId>
   <packaging>pom</packaging>
   <version>trunk-SNAPSHOT</version>
 
@@ -58,8 +58,9 @@
   </properties>
 
   <modules>
-    <module>kafka-proxy</module>
-    <module>opentsdb-consumer</module>
+    <module>opentsdb-proxy</module>
+    <module>opentsdb-client</module>
+    <module>kafka-consumer</module>
   </modules>
 
   <dependencyManagement>
