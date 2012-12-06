@@ -1,5 +1,5 @@
-Opentsdb services for using kafka to transit the data
+OpenTSDB Contributions
 
-Kafka-proxy: Receives the tsdb requests via the telnet socket and produces a kafka message
-
-opentsdb-consumer: Takes kafka messages and sends them to the OpenTSDB daemon (telnet socket)
+opentsdb-proxy: Allows for you to proxy opentsdb commands to a number of different end points.
+opentsdb-client: Super basic netty based client for interacting with opentsdb daemon
+kafka-consumer: Kafka Consumer for pulling data out of kafka and sending it to the opentsdb daemon. Super useful if you use the kafka producer in the opentsdb-proxy.
