@@ -1,30 +1,35 @@
 package net.opentsdb.proxy.netty.rpc;
 
-import net.opentsdb.proxy.kafka.KafkaProducer;
+import net.opentsdb.proxy.clients.Client;
 import org.jboss.netty.channel.Channel;
 
 public class PutDataPointRpc implements TelnetRpc {
-  private final KafkaProducer producer;
+  private final Client client;
 
-  public PutDataPointRpc(KafkaProducer producer) {
-    this.producer = producer;
+  public PutDataPointRpc(Client client) {
+    this.client = client;
   }
 
   @Override
-  public void execute(Channel chan, String[] command) {
-    if (command.length < 5) {
-      throw new IllegalArgumentException("not enough arguments (need least 4, got " + (command.length) + ')');
+  public void execute(Channel chan, String[] commands) {
+    if (commands.length < 5) {
+      throw new IllegalArgumentException("not enough arguments (need least 4, got " + (commands.length) + ')');
     }
-    final String metric = command[1];
+    final String metric = commands[1];
     if (metric.length() <= 0) {
       throw new IllegalArgumentException("empty metric name");
     }
 
-    final String value = command[3];
+    final String value = commands[3];
     if (value.length() <= 0) {
       throw new IllegalArgumentException("empty value");
     }
 
-    producer.sendMessage(command);
+    StringBuilder sb = new StringBuilder();
+    for (String command : commands) {
+      sb.append(command).append(" ");
+    }
+
+    client.sendMessage(sb.toString());
   }
 }

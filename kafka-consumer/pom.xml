@@ -22,7 +22,7 @@
       <artifactId>kafka</artifactId>
     </dependency>
     <dependency>
-      <groupId>net.opentsdb.contrib</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>opentsdb-client</artifactId>
       <version>${project.version}</version>
     </dependency>

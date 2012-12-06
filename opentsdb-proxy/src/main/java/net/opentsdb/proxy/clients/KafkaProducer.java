@@ -1,4 +1,4 @@
-package net.opentsdb.proxy.kafka;
+package net.opentsdb.proxy.clients;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -13,7 +13,7 @@ import java.util.Properties;
 /**
  * Sends the "put" commands that netty receives through kafka
  */
-public class KafkaProducer {
+public class KafkaProducer implements Client {
   private static final String KAFKA_TOPIC_KEY = "tsdb.kafka.topic";
   private static final Logger logger = LoggerFactory.getLogger(KafkaProducer.class);
   private final Producer<String, String> producer;
@@ -36,17 +36,11 @@ public class KafkaProducer {
    *
    * @param message String[] that netty received that started with put
    */
-  public void sendMessage(String[] message) {
+  public void sendMessage(String message) {
 
-    // turn the String[] in to a single string
-    StringBuilder result = new StringBuilder();
-    for (String aMessage : message) {
-      result.append(aMessage).append(" ");
-    }
+    ProducerData<String, String> data = new ProducerData<>(topicId, message);
 
-    ProducerData<String, String> data = new ProducerData<>(topicId, result.toString());
-
-    logger.debug("Sending: {}", result.toString());
+    logger.debug("Sending: {}", message);
 
     producer.send(data);
   }

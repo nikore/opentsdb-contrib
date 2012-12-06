@@ -1,6 +1,6 @@
 package net.opentsdb.proxy.netty;
 
-import net.opentsdb.proxy.kafka.KafkaProducer;
+import net.opentsdb.proxy.clients.Client;
 import net.opentsdb.proxy.netty.rpc.PutDataPointRpc;
 import net.opentsdb.proxy.netty.rpc.TelnetRpc;
 import net.opentsdb.proxy.netty.rpc.VersionRpc;
@@ -15,10 +15,10 @@ import java.util.Arrays;
 
 public class RpcHandler extends SimpleChannelUpstreamHandler {
   private static final Logger logger = LoggerFactory.getLogger(RpcHandler.class);
-  private final KafkaProducer producer;
+  private final Client client;
 
-  public RpcHandler(KafkaProducer producer) {
-    this.producer = producer;
+  public RpcHandler(Client client) {
+    this.client = client;
   }
 
   @Override
@@ -36,7 +36,7 @@ public class RpcHandler extends SimpleChannelUpstreamHandler {
     logger.debug("Command is {}", Arrays.toString(command));
     switch (command[0]) {
       case "put":
-        rpc = new PutDataPointRpc(producer);
+        rpc = new PutDataPointRpc(client);
         break;
       case "version":
         rpc = new VersionRpc();
@@ -50,5 +50,4 @@ public class RpcHandler extends SimpleChannelUpstreamHandler {
       rpc.execute(channel, command);
     }
   }
-
 }

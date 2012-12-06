@@ -1,11 +1,12 @@
 package net.opentsdb.proxy.modules;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Injector;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
-import net.opentsdb.proxy.kafka.KafkaProducer;
+import net.opentsdb.proxy.clients.Client;
 import net.opentsdb.proxy.netty.PipelineFactory;
 import org.jboss.netty.channel.ChannelFactory;
 import org.jboss.netty.channel.group.ChannelGroup;
@@ -22,6 +23,7 @@ import java.util.concurrent.Executors;
  */
 public class ProxyModule extends AbstractModule {
   private static final String PROXY_PORT = "tsdb.proxy.port";
+  private static final String CLIENT_CLASS = "tsdb.proxy.client.class";
 
   private final Properties properties;
 
@@ -34,7 +36,12 @@ public class ProxyModule extends AbstractModule {
     //Magic! loads the properties as something that can be accessed via @Named
     Names.bindProperties(binder(), properties);
     bind(PipelineFactory.class).asEagerSingleton();
-    bind(KafkaProducer.class).asEagerSingleton();
+  }
+
+  @Provides
+  @Singleton
+  Client provideClient(Injector injector, @Named(CLIENT_CLASS) Class<Client> clientClass) {
+    return injector.getInstance(clientClass);
   }
 
   @Provides

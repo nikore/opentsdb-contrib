@@ -1,7 +1,7 @@
 package net.opentsdb.proxy.netty;
 
 import com.google.inject.Inject;
-import net.opentsdb.proxy.kafka.KafkaProducer;
+import net.opentsdb.proxy.clients.Client;
 import net.opentsdb.proxy.util.WordSplitter;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.ChannelPipeline;
@@ -31,8 +31,8 @@ public class PipelineFactory implements ChannelPipelineFactory {
    * Constructor.
    */
   @Inject
-  public PipelineFactory(KafkaProducer producer) {
-    this.rpchandler = new RpcHandler(producer);
+  public PipelineFactory(Client client) {
+    this.rpchandler = new RpcHandler(client);
   }
 
   @Override
