@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+/**
+ * Main method controls the life cycle of the app
+ */
 public class ProxyServer {
   private static final Logger logger = LoggerFactory.getLogger(ProxyServer.class);
 

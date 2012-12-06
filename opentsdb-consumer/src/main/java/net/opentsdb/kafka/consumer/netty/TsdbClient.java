@@ -12,6 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 
+/**
+ * Netty client for the Telnet OpenTSDB API
+ */
 @Singleton
 public class TsdbClient extends AbstractIdleService {
   private static final Logger logger = LoggerFactory.getLogger(TsdbClient.class);

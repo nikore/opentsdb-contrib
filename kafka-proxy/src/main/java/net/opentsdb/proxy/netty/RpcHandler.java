@@ -35,6 +35,9 @@ public class RpcHandler extends SimpleChannelUpstreamHandler {
       case "put":
         rpc = new PutDataPointRpc(producer);
         break;
+      case "version":
+        rpc = new VersionRpc();
+        break;
       default:
         rpc = null;
     }

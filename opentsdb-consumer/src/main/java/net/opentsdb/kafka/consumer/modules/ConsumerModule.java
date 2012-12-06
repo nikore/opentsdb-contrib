@@ -13,6 +13,9 @@ import java.net.InetSocketAddress;
 import java.util.Properties;
 import java.util.concurrent.Executors;
 
+/**
+ * Guice Module used to bind instances
+ */
 public class ConsumerModule extends AbstractModule {
   private final static String TSDB_PORT = "tsdb.port";
   private final static String TSDB_HOST = "tsdb.host";

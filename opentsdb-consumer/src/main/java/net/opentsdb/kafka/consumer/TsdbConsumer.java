@@ -20,6 +20,9 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.Properties;
 
+/**
+ * Kafka Consumer pulls the data out of kafka and sends it to the OpenTSDB daemon
+ */
 @Singleton
 public class TsdbConsumer extends AbstractIdleService {
   private static final String KAFKA_TOPIC = "tsdb.kafka.topic";

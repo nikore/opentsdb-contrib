@@ -17,6 +17,9 @@ import java.net.SocketAddress;
 import java.util.Properties;
 import java.util.concurrent.Executors;
 
+/**
+ * Guice module for binding instances together
+ */
 public class ProxyModule extends AbstractModule {
   private static final String PROXY_PORT = "tsdb.proxy.port";
 
@@ -28,6 +31,7 @@ public class ProxyModule extends AbstractModule {
 
   @Override
   protected void configure() {
+    //Magic! loads the properties as something that can be accessed via @Named
     Names.bindProperties(binder(), properties);
     bind(PipelineFactory.class).asEagerSingleton();
     bind(KafkaProducer.class).asEagerSingleton();

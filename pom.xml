@@ -46,15 +46,15 @@
     <maven.compile.target>1.7</maven.compile.target>
     <package-mainClass>none</package-mainClass>
 
-    <slf4j-version>1.6.6</slf4j-version>
-    <logback-version>1.0.7</logback-version>
+    <slf4j-version>1.7.2</slf4j-version>
+    <logback-version>1.0.9</logback-version>
     <kafka-version>0.7.1</kafka-version>
     <netty-version>3.5.7.Final</netty-version>
     <guice-version>3.0</guice-version>
     <guava-version>13.0.1</guava-version>
     <scala-version>2.8.0</scala-version>
     <zkclient-version>0.1</zkclient-version>
-    <zookeeper-version>3.3.5</zookeeper-version>
+    <zookeeper-version>3.4.5</zookeeper-version>
   </properties>
 
   <modules>
@@ -128,6 +128,14 @@
             <groupId>javax.jms</groupId>
             <artifactId>jms</artifactId>
           </exclusion>
+          <exclusion>
+            <groupId>org.jboss.netty</groupId>
+            <artifactId>netty</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+          </exclusion>
         </exclusions>
       </dependency>
     </dependencies>
@@ -148,12 +156,23 @@
   </profiles>
 
   <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.0</version>
+        <configuration>
+          <generateBackupPoms>false</generateBackupPoms>
+          <allowSnapshots>false</allowSnapshots>
+        </configuration>
+      </plugin>
+    </plugins>
     <pluginManagement>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>2.5.1</version>
+          <version>3.0</version>
           <configuration>
             <source>${maven.compile.source}</source>
             <target>${maven.compile.target}</target>
