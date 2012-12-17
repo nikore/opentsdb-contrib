@@ -111,11 +111,13 @@
         <groupId>zkclient</groupId>
         <artifactId>zkclient</artifactId>
         <version>${zkclient-version}</version>
+        <scope>compile</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.zookeeper</groupId>
         <artifactId>zookeeper</artifactId>
         <version>${zookeeper-version}</version>
+        <scope>compile</scope>
         <exclusions>
           <exclusion>
             <groupId>com.sun.jmx</groupId>
@@ -138,6 +140,12 @@
             <artifactId>slf4j-log4j12</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.10</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
