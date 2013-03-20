@@ -23,20 +23,20 @@ import com.google.common.util.concurrent.AbstractIdleService;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
+import kafka.consumer.*;
 import kafka.consumer.Consumer;
-import kafka.consumer.ConsumerConfig;
-import kafka.consumer.KafkaStream;
-import kafka.consumer.Whitelist;
 import kafka.javaapi.consumer.ConsumerConnector;
 import kafka.message.Message;
-import kafka.message.MessageAndMetadata;
-import kafka.serializer.DefaultDecoder;
 import net.opentsdb.client.netty.TsdbClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -68,11 +68,19 @@ public class TsdbConsumer extends AbstractIdleService {
   @Override
   protected void startUp() throws Exception {
     logger.info("Starting up TSDB Kafka Consumer");
-    KafkaStream<Message> stream = consumerConnector.createMessageStreamsByFilter(new Whitelist(topic), 1, new DefaultDecoder()).get(0);
-    for (MessageAndMetadata<Message> aStream : stream) {
-      String message = decoder.decode(aStream.message().payload()).toString();
-      logger.debug("Message is: {}", message);
-      client.send(message);
+    Map<String, Integer> topicCountMap = new HashMap<>();
+    topicCountMap.put(topic, 1);
+    Map<String, List<KafkaStream<Message>>> consumerMap = consumerConnector.createMessageStreams(topicCountMap);
+    KafkaStream<Message> stream =  consumerMap.get(topic).get(0);
+    ConsumerIterator<Message> it = stream.iterator();
+    while(it.hasNext()) {
+      Message message = it.next().message();
+      ByteBuffer buffer = message.payload();
+      byte[] bytes = new byte[buffer.remaining()];
+      buffer.get(bytes);
+      String messageString = new String(bytes);
+      logger.debug("Message is: {}", messageString);
+      client.send(messageString);
     }
   }
 
