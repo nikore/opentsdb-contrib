@@ -71,7 +71,7 @@
     <netty-version>3.6.6.Final</netty-version>
     <guice-version>3.0</guice-version>
     <guava-version>14.0.1</guava-version>
-    <scala-version>2.10.0</scala-version>
+    <scala-version>2.10.2</scala-version>
     <zkclient-version>0.1</zkclient-version>
     <zookeeper-version>3.4.5</zookeeper-version>
   </properties>
@@ -131,6 +131,16 @@
         <artifactId>zkclient</artifactId>
         <version>${zkclient-version}</version>
         <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.typesafe</groupId>
+        <artifactId>config</artifactId>
+        <version>1.0.2</version>
+      </dependency>
+      <dependency>
+        <groupId>net.codingwell</groupId>
+        <artifactId>scala-guice_2.10</artifactId>
+        <version>4.0.0-beta</version>
       </dependency>
       <dependency>
         <groupId>org.apache.zookeeper</groupId>
@@ -194,9 +204,35 @@
           <allowSnapshots>false</allowSnapshots>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>net.alchim31.maven</groupId>
+          <artifactId>scala-maven-plugin</artifactId>
+          <version>3.1.5</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <goal>testCompile</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <scalaVersion>${scala-version}</scalaVersion>
+            <recompileMode>incremental</recompileMode>
+            <useZincServer>true</useZincServer>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
