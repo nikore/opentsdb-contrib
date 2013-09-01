@@ -67,12 +67,12 @@
 
     <slf4j-version>1.7.5</slf4j-version>
     <logback-version>1.0.13</logback-version>
-    <kafka-version>0.7.1</kafka-version>
+    <kafka-version>0.8.0-rr</kafka-version>
     <netty-version>3.6.6.Final</netty-version>
     <guice-version>3.0</guice-version>
     <guava-version>14.0.1</guava-version>
     <scala-version>2.10.2</scala-version>
-    <zkclient-version>0.1</zkclient-version>
+    <zkclient-version>20120522</zkclient-version>
     <zookeeper-version>3.4.5</zookeeper-version>
   </properties>
 
