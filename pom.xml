@@ -74,6 +74,8 @@
     <scala-version>2.10.2</scala-version>
     <zkclient-version>20120522</zkclient-version>
     <zookeeper-version>3.4.5</zookeeper-version>
+    <metrics-version>2.2.0</metrics-version>
+    <snappy-version>1.0.4.1</snappy-version>
   </properties>
 
   <modules>
@@ -119,6 +121,16 @@
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>${guava-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.yammer.metrics</groupId>
+        <artifactId>metrics-core</artifactId>
+        <version>${metrics-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.xerial.snappy</groupId>
+        <artifactId>snappy-java</artifactId>
+        <version>${snappy-version}</version>
       </dependency>
       <dependency>
         <groupId>org.scala-lang</groupId>

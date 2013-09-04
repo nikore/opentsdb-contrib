@@ -12,7 +12,8 @@ import java.util.concurrent.Executors
 class TsdbConsumer @Inject() (props: Properties, client: TsdbClient, @Named("tsdb.kafka.topic") topicName: String, @Named("tsdb.kafka.topic.partitions") partitions: Int) extends AbstractIdleService{
   private final val logger = LoggerFactory.getLogger(classOf[TsdbConsumer])
   private final val consumerConnector = Consumer.create(new ConsumerConfig(props))
-  private final val executorPool = Executors.newFixedThreadPool(partitions)
+  private final val executorPool = Executors.newFixedThreadPool(partitions, new ConsumerThreadFactory)
+
 
   def startUp() {
     logger.info("Starting up TSDB Kafka Consumer")

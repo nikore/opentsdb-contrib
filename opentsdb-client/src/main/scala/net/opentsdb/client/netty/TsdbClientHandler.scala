@@ -8,7 +8,8 @@ class TsdbClientHandler extends SimpleChannelUpstreamHandler {
 
   override def handleUpstream(ctx: ChannelHandlerContext, e: ChannelEvent) = {
     e match {
-      case eM: ChannelStateEvent => logger.info(eM.toString)
+      case e: ChannelStateEvent => logger.info(e.toString)
+      case _ =>
     }
 
     super.handleUpstream(ctx, e)

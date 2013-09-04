@@ -6,7 +6,9 @@ import com.google.inject.Inject
 import org.jboss.netty.bootstrap.ClientBootstrap
 import java.net.InetSocketAddress
 import org.jboss.netty.channel.{Channel, ChannelFuture, ChannelFactory}
+import javax.inject.Singleton
 
+@Singleton
 class TsdbClient @Inject() (factory: ChannelFactory, address: InetSocketAddress, pipelineFactory: TsdbClientPipelineFactory) extends AbstractIdleService {
   private final val logger: Logger = LoggerFactory.getLogger(classOf[TsdbClient])
 
