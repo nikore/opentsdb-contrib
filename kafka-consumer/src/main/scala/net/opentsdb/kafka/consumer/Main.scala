@@ -16,11 +16,7 @@ object Main {
   def main(args: Array[String]) {
     val props = loadProps(new File(args{0}))
 
-    val injector = Guice.createInjector(new ConsumerModule(props), new TsdbClientModule(props))
-
-    logger.info("Starting TSDB Client...")
-    val client = injector.getInstance(classOf[TsdbClient])
-    client.startAndWait()
+    val injector = Guice.createInjector(new ConsumerModule(props))
 
     logger.info("Starting TSDB Consumer...")
     val consumer = injector.getInstance(classOf[TsdbConsumer])
@@ -30,7 +26,6 @@ object Main {
       override def run() {
         logger.info("Shutting down consumer")
         consumer.stopAndWait()
-        client.stopAndWait()
       }
     })
   }

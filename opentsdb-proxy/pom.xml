@@ -63,7 +63,7 @@
       <artifactId>scala-library</artifactId>
     </dependency>
     <dependency>
-      <groupId>zkclient</groupId>
+      <groupId>com.101tec</groupId>
       <artifactId>zkclient</artifactId>
     </dependency>
     <dependency>

@@ -6,6 +6,8 @@ import org.slf4j.{LoggerFactory, Logger}
 class TsdbClientHandler extends SimpleChannelUpstreamHandler {
   private final val logger: Logger = LoggerFactory.getLogger(classOf[TsdbClient])
 
+
+
   override def handleUpstream(ctx: ChannelHandlerContext, e: ChannelEvent) = {
     e match {
       case e: ChannelStateEvent => logger.info(e.toString)

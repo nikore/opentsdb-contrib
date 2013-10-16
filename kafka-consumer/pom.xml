@@ -36,15 +36,16 @@
   </properties>
 
   <dependencies>
+    <!-- These two libaries are not available on maven public I had to compile them and add them locally -->
+    <dependency>
+      <groupId>net.opentsdb</groupId>
+      <artifactId>opentsdb</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.apache.kafka</groupId>
       <artifactId>kafka</artifactId>
     </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>opentsdb-client</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+    <!-- -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -78,7 +79,7 @@
       <artifactId>scala-library</artifactId>
     </dependency>
     <dependency>
-      <groupId>zkclient</groupId>
+      <groupId>com.101tec</groupId>
       <artifactId>zkclient</artifactId>
     </dependency>
     <dependency>

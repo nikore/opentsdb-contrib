@@ -17,5 +17,5 @@ class TsdbClientModule(props: Properties) extends AbstractModule with ScalaModul
 
   @Provides @Singleton def provideSocketAddress(@Named("tsdb.port") port: Int, @Named("tsdb.host") host: String) : InetSocketAddress = new InetSocketAddress(host, port)
 
-  @Provides @Singleton def provideChannelFactory : ChannelFactory = new NioClientSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool())
+  @Provides @Singleton def provideChannelFactory : ChannelFactory = new NioClientSocketChannelFactory()
 }

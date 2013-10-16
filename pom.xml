@@ -51,7 +51,6 @@
     </license>
   </licenses>
 
-
   <groupId>net.opentsdb.contrib</groupId>
   <artifactId>core</artifactId>
   <packaging>pom</packaging>
@@ -67,15 +66,17 @@
 
     <slf4j-version>1.7.5</slf4j-version>
     <logback-version>1.0.13</logback-version>
-    <kafka-version>0.8.0-rr</kafka-version>
-    <netty-version>3.6.6.Final</netty-version>
+    <kafka-version>0.8.0-rr3</kafka-version>
+    <netty-version>3.7.0.Final</netty-version>
     <guice-version>3.0</guice-version>
-    <guava-version>14.0.1</guava-version>
-    <scala-version>2.10.2</scala-version>
-    <zkclient-version>20120522</zkclient-version>
+    <guava-version>15.0</guava-version>
+    <scala-version>2.10.3</scala-version>
+    <zkclient-version>0.3</zkclient-version>
     <zookeeper-version>3.4.5</zookeeper-version>
     <metrics-version>2.2.0</metrics-version>
     <snappy-version>1.0.4.1</snappy-version>
+    <async-hbase>1.4.1</async-hbase>
+    <tsdb-version>1.1.0</tsdb-version>
   </properties>
 
   <modules>
@@ -139,10 +140,32 @@
         <version>${scala-version}</version>
       </dependency>
       <dependency>
-        <groupId>zkclient</groupId>
+        <groupId>org.hbase</groupId>
+        <artifactId>asynchbase</artifactId>
+        <version>${async-hbase}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.opentsdb</groupId>
+        <artifactId>opentsdb</artifactId>
+        <version>${tsdb-version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.101tec</groupId>
         <artifactId>zkclient</artifactId>
         <version>${zkclient-version}</version>
         <scope>compile</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>net.codingwell</groupId>
@@ -174,6 +197,10 @@
           <exclusion>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -225,7 +252,7 @@
         <plugin>
           <groupId>net.alchim31.maven</groupId>
           <artifactId>scala-maven-plugin</artifactId>
-          <version>3.1.5</version>
+          <version>3.1.6</version>
           <executions>
             <execution>
               <goals>

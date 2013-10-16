@@ -6,11 +6,14 @@ import org.jboss.netty.channel.group.DefaultChannelGroup
 import java.nio.channels.ClosedChannelException
 import java.io.IOException
 
+object ConnectionManager {
+  final val channels: DefaultChannelGroup = new DefaultChannelGroup("all-channels")
+}
+
 class ConnectionManager extends SimpleChannelHandler {
   private final val logger: Logger = LoggerFactory.getLogger(classOf[TsdbClient])
-  private final val channels: DefaultChannelGroup = new DefaultChannelGroup("all-channels")
 
-  override def channelOpen(ctx: ChannelHandlerContext, e: ChannelStateEvent) = channels.add(e.getChannel)
+  override def channelOpen(ctx: ChannelHandlerContext, e: ChannelStateEvent) = ConnectionManager.channels.add(e.getChannel)
 
   override def handleUpstream(ctx: ChannelHandlerContext, e: ChannelEvent) = {
     e match {
