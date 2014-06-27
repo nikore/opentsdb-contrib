@@ -43,7 +43,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.kafka</groupId>
-      <artifactId>kafka</artifactId>
+      <artifactId>kafka_2.10</artifactId>
     </dependency>
     <!-- -->
     <dependency>

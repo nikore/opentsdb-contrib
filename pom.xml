@@ -66,7 +66,7 @@
 
     <slf4j-version>1.7.5</slf4j-version>
     <logback-version>1.0.13</logback-version>
-    <kafka-version>0.8.0-rr3</kafka-version>
+    <kafka-version>0.8.1.1</kafka-version>
     <netty-version>3.7.0.Final</netty-version>
     <guice-version>3.0</guice-version>
     <guava-version>15.0</guava-version>
@@ -90,7 +90,7 @@
       <!-- local install jar kafka not in repos yet -->
       <dependency>
         <groupId>org.apache.kafka</groupId>
-        <artifactId>kafka</artifactId>
+        <artifactId>kafka_2.10</artifactId>
         <version>${kafka-version}</version>
       </dependency>
       <dependency>
